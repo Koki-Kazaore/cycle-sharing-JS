@@ -10,9 +10,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "adorable-avatars": "^0.4.1",
+    "adorable-avatars": "^0.5.0",
     "body-parser": "^1.19.0",
-    "cloudinary": "^1.18.1",
+    "cloudinary": "^1.32.0",
+    "dotenv": "^16.0.3",
     "ejs": "^3.0.1",
     "express": "^4.17.1",
     "express-fileupload": "^1.1.6",
@@ -24,6 +25,7 @@
     "nodemailer": "^6.4.5",
     "passport": "^0.4.1",
     "password-hash": "^1.2.2",
+    "react-script": "^2.0.5",
     "request": "^2.88.0"
   }
 }
