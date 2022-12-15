@@ -14,7 +14,7 @@ exports.register = function(req, res) {
     password: hashedPassword,
     address: req.body.address,
     contact_no: req.body.contact_no,
-    created: today
+    // created: today
   };
 
   if (user.name != "" && user.email != "" && user.password != "") {
