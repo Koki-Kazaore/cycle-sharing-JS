@@ -34,12 +34,14 @@ app.use(
   "/randomimagepasswordisalwayschangingyoucannotdeocdeit",
   avatarsMiddleware
 );
+// sessionの設定
+// session settings
 app.use(
   session({
     name: "sid",
     resave: false,
     saveUninitialized: false,
-    secret: "aurkyakarsaktehai!",
+    secret: process.env.SESSION_SECRET,
     cookie: {
       maxAge: 60 * 60 * 2 * 1000,
       sameSite: false,
@@ -47,6 +49,23 @@ app.use(
     }
   })
 );
+
+// ログイン状態確認
+// check login status
+app.use((req, res, next) => {
+  if (req.session.userId === undefined) {
+    console.log('ログインしていません');
+    // res.localsオブジェクトに指定することでejsファイルで使いやすくする
+    // make it easier to use in .ejs files by specifying it in the res.locals object
+    res.locals.username = "ゲスト";
+    res.locals.isLoggedIn = false;
+  } else {
+    console.log('ログインしています');
+    res.locals.username = req.session.username;
+    res.locals.isLoggedIn = true;
+  }
+  next();
+});
 
 //storage
 var storage = multer.diskStorage({
@@ -148,6 +167,19 @@ app.get("/reset/:token", function(req, res) {
     }
   );
 });
+
+// dbの中身を確認するためのルーティング
+// Routing for db contents
+app.get("/dbcheck", (req, res) => {
+  connection.query(
+    "SELECT * FROM users",
+    (error, results) => {
+      console.log(results);
+      res.render("hello.ejs");
+    }
+  );
+});
+
 //front page
 app.get("/", sessionRoute.redirectLogin, (req, res) => {
   const { userId } = req.session;
@@ -191,6 +223,10 @@ app.get("/login", sessionRoute.redirectHome, (req, res) => {
 
 app.get("/about", (req, res) => {
   res.render("about.ejs");
+});
+
+app.get("/loggedin", (req, res) => {
+  res.render("loggedin.ejs", {name: session.name});
 });
 
 app.get("/register", sessionRoute.redirectHome, (req, res) => {
