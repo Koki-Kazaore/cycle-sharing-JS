@@ -11,6 +11,7 @@ CREATE TABLE users (
 );
 
 -- MySQLのDATETIME値は'1000-01-01 00:00:00'から'9999-12-31 23:59:59'の範囲でしかサポートされていない
+-- MySQL DATETIME values are only supported in the range '1000-01-01 00:00:00' to '9999-12-31 23:59:59'
 CREATE TABLE cycles (
      cycle_id MEDIUMINT NOT NULL AUTO_INCREMENT,
      cycle_name CHAR(30) NOT NULL,
