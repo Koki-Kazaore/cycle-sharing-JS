@@ -17,8 +17,10 @@ CREATE TABLE cycles (
      cycle_name CHAR(30) NOT NULL,
      from_user VARCHAR(320) NOT NULL,
      pickup_address VARCHAR(255) NOT NULL,
-     from_time datetime  NOT NULL default '1000-01-01 00:00:00',
+     from_time datetime NOT NULL default '1000-01-01 00:00:00',
      to_time datetime NOT NULL default '1000-01-01 00:00:00',
+     cycle_image_link TEXT NOT NULL,
+     from_user_name CHAR(30) NOT NULL,
      booking_status TINYINT(1) default 0,
      PRIMARY KEY (cycle_id)
 );
