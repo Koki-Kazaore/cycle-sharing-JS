@@ -1,7 +1,9 @@
 var connection = require("../config/db").connection;
 const cloudinary = require("cloudinary").v2;
 const path = require("path");
-require('dotenv').config(); // .envファイルの有効化
+// .envファイルの有効化
+// enabling .env files
+require('dotenv').config();
 
 cloudinary.config({
   cloud_name: process.env.CLOUD_NAME,
