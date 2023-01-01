@@ -14,7 +14,7 @@ exports.register = function(req, res) {
     password: hashedPassword,
     address: req.body.address,
     contact_no: req.body.contact_no,
-    // created: today
+    created: today.getFullYear() + "-" + (today.getMonth()+1) + "-" + today.getDate(),
   };
 
   if (user.name != "" && user.email != "" && user.password != "") {
@@ -34,6 +34,7 @@ exports.register = function(req, res) {
         //   code: 200,
         //   success: "user registered sucessfully"
         // });
+        console.log(user.created);
         res.redirect("/login");
       }
     });

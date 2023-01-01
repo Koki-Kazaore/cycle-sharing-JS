@@ -7,6 +7,7 @@ CREATE TABLE users (
      password VARCHAR(255) NOT NULL,
      address VARCHAR(255),
      contact_no VARCHAR(20),
+     created DATE,
      PRIMARY KEY (id)
 );
 
@@ -22,5 +23,7 @@ CREATE TABLE cycles (
      cycle_image_link TEXT NOT NULL,
      from_user_name CHAR(30) NOT NULL,
      booking_status TINYINT(1) default 0,
+     booked_by MEDIUMINT,
+     booking_time DATE,
      PRIMARY KEY (cycle_id)
 );

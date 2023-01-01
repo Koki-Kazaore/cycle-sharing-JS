@@ -71,10 +71,13 @@ exports.addCycle = function(req, res, next) {
                 failed: "error ocurred"
               });
             } else {
-              res.send({
-                code: 200,
-                success: "CYcle registered sucessfully"
-              });
+              // エラー無く自転車を追加できた場合はホームページへ遷移
+              // If a bike can be added without error, transition to the homepage
+              res.redirect("/");
+              // res.send({
+              //   code: 200,
+              //   success: "CYcle registered sucessfully"
+              // });
             }
           });
         } else {
