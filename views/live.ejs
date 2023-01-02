@@ -21,17 +21,17 @@
 
        var cycles = <%-JSON.stringify(data)%>;
         console.log(cycles);
-         function timeOfGivenDate(str) {
-                var localDate = new Date(str);
-                var h = localDate.getHours(), m = localDate.getMinutes();
-                if (h < 10) { h = "0" + h; } if (m < 10) { m = "0" + m; }
-                return h + ":" + m;
-            }
-            function dateOfGivenDate(str) {
-                var localDate = new Date(str);
-                var day = localDate.getDate(), month = localDate.getMonth() + 1, year = localDate.getFullYear();
-                return day + "-" + month + "-" + year;
-            }
+        function timeOfGivenDate(str) {
+              var localDate = new Date(str);
+              var h = localDate.getHours(), m = localDate.getMinutes();
+              if (h < 10) { h = "0" + h; } if (m < 10) { m = "0" + m; }
+              return h + ":" + m;
+        }
+        function dateOfGivenDate(str) {
+              var localDate = new Date(str);
+              var day = localDate.getDate(), month = localDate.getMonth() + 1, year = localDate.getFullYear();
+              return day + "-" + month + "-" + year;
+        }
     </script>
 
     <style>
@@ -77,9 +77,12 @@
       $(document).ready(function() {
         $.each(cycles, function(i, val) {
           $("#live-orders").append(
-            ` <div class='col-xs-12 col-md-3 coolboy'> <article class='card animated fadeInLeft'> <h4>Booking time : ${timeOfGivenDate(cycles[i].booking_time)} on ${dateOfGivenDate(cycles[i].booking_time)}</h4> <img class='card-img-top img-responsive' src='${cycles[i].cycle_image_link}' alt='${cycles[i].cycle_name}' height="200px" style="width: auto;" />   <div class='card-body'> ` +
-              ` <h4 class='card-title' id='cycle-title'>  ${cycles[i].cycle_name} ` +
-              `<span style='font-size: small;'>of <a href='#' class='badge badge-secondary'>${cycles[i].from_user_name}</a></span> </h4><p class='card-text'>  <strong>Pickup point  <i class='fa fa-map-marker' aria-hidden='true' style='color:red;'></i> : </strong> ${cycles[i].pickup_address} <br /> ` +
+            `<div class='col-xs-12 col-md-3 coolboy'> <article class='card animated fadeInLeft'> <h4>Booking time : ${timeOfGivenDate(cycles[i].booking_time)} on ${dateOfGivenDate(cycles[i].booking_time)}</h4> <img class='card-img-top img-responsive' src='${cycles[i].cycle_image_link}' alt='${cycles[i].cycle_name}' height="200px" style="width: auto;" />   <div class='card-body'> ` 
+              +
+              ` <h4 class='card-title' id='cycle-title'>  ${cycles[i].cycle_name} ` 
+                +
+              `<span style='font-size: small;'>of <a href='#' class='badge badge-secondary'>${cycles[i].from_user_name}</a></span> </h4><p class='card-text'>  <strong>Pickup point  <i class='fa fa-map-marker' aria-hidden='true' style='color:red;'></i> : </strong> ${cycles[i].pickup_address} <br /> ` 
+                +
               `<strong>From <i class='fa fa-calendar text-primary' aria-hidden='true'></i> :  </strong> ${timeOfGivenDate(
                 cycles[i].from_time
               )}<span class='badge badge-pill badge-light'>${dateOfGivenDate(
@@ -88,10 +91,20 @@
                 cycles[i].to_time
               )} <span class='badge badge-pill badge-light'>${dateOfGivenDate(
                 cycles[i].to_time
-              )}` +
-              "</span>   <br />  </p>  " +
-              `<button type='button' class='btn btn-primary text-center' id='model-pop-${i}' data-toggle="modal" data-target="#model-pop-gg-${i}"> Out Of Hours </button>
-              </div> </article></div>`
+              )}` 
+              +
+              "</span>   <br />  </p>  " 
+              +
+              `<button type='button' class='btn btn-primary text-center' id='model-pop-${i}' data-toggle="modal" data-target="#model-pop-gg-${i}">
+                <!-- Change the text in the button depending on wheter it is in use or not. -->
+                ${(new Date()).getTime() >= (new Date(cycles[i].from_time)).getTime() 
+                  && (new Date()).getTime() < (new Date(cycles[i].to_time)).getTime() 
+                  ? "Start Using" 
+                  : "Out Of Hours"
+                }
+              </button>
+              </div> </article>
+            </div>`
           );
         });
       });
@@ -182,10 +195,6 @@
     </nav>
 
     <div id="live-orders"></div>
-
-    <!-- <div class="footer bg-dark text-secondary">
-      Copyright &copy; 2020 All Rights Reserved by Cycool.
-    </div> -->
 
     <script
       src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
