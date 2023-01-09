@@ -1,4 +1,4 @@
-# Cycool - A cycle sharing platform
+# BI-KEYING - A cycle sharing platform
 ## A full stack online cycle sharing web application and API
 
 ### Features
