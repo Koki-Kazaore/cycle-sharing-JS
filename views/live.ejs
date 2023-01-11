@@ -74,6 +74,16 @@
       }
     </style>
     <script>
+      // action to put a "out of hours" button
+      function outOfHoursAlert(){
+        alert("利用時間外です!");
+      }
+      // action to put a "available" button
+      function availableAction(){
+        window.location.href = "./";
+      }
+    </script>
+    <script>
       $(document).ready(function() {
         $.each(cycles, function(i, val) {
           $("#live-orders").append(
@@ -95,14 +105,13 @@
               +
               "</span>   <br />  </p>  " 
               +
-              `<button type='button' class='btn btn-primary text-center' id='model-pop-${i}' data-toggle="modal" data-target="#model-pop-gg-${i}">
-                <!-- Change the text in the button depending on wheter it is in use or not. -->
-                ${(new Date()).getTime() >= (new Date(cycles[i].from_time)).getTime() 
-                  && (new Date()).getTime() < (new Date(cycles[i].to_time)).getTime() 
-                  ? "Start Using" 
-                  : "Out Of Hours"
-                }
-              </button>
+
+              `<!-- Change the text in the button depending on wheter it is in use or not. -->
+              ${(new Date()).getTime() >= (new Date(cycles[i].from_time)).getTime()
+                && (new Date()).getTime() < (new Date(cycles[i].to_time)).getTime()
+                ? "<button type='button' onclick='availableAction()' class='btn btn-primary text-center' id='model-pop-${i}' data-toggle='modal' data-target='#model-pop-gg-${i}'>available</button>"
+                : "<button type='button' onclick='outOfHoursAlert()' class='btn btn-primary text-center' id='model-pop-${i}' data-toggle='modal' data-target='#model-pop-gg-${i}'>out of hours</button>"
+              }
               <!-- TO DO: link to somewhere if taped start using button -->
               </div> </article>
             </div>`
