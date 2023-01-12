@@ -96,11 +96,12 @@ const orderRouter = require("./routes/orders/order");
 const orderLive = require("./routes/orders/live");
 const orderCycles = require("./routes/orders/cycles");
 const orderPrevious = require("./routes/orders/previous");
+const orderLiveUnlock = require("./routes/orders/unlock");
 const verify = require("./routes/verify");
 const forget = require("./routes/forget");
 const reset = require("./routes/reset");
 
-app.use("/orders", orderRouter);
+app.use("/orders", sessionRoute.redirectLogin, orderRouter);
 
 app.post("/addcycle", upload.single("myFile"), addCycle.addCycle);
 app.post("/", login.login);
