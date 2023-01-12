@@ -73,16 +73,19 @@
         min-height: 100%;
       }
     </style>
+
     <script>
       // action to put a "out of hours" button
       function outOfHoursAlert(){
         alert("利用時間外です!");
       }
       // action to put a "available" button
-      function availableAction(){
-        window.location.href = "./";
+      function availableAction(index){
+        
+        location.href = location.href + "/" + cycles[i].cycle_id;
       }
     </script>
+
     <script>
       $(document).ready(function() {
         $.each(cycles, function(i, val) {
