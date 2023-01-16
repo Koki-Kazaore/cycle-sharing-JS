@@ -9,7 +9,7 @@ exports.live = async function(req, res) {
     fields
   ) {
     connection.query(
-      "SELECT * FROM cycles where booked_by = ?",
+      "SELECT * FROM cycles where booked_by = ? AND to_time >= NOW()",
       [userId],
       function(error, results2, fields) {
         if (error) throw error;
