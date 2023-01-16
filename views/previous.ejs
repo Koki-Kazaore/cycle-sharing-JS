@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      rel="stylesheet"
+    />
+    <link href="./style.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+      var user = <%-JSON.stringify(user)%>;
+      console.log(user);
+
+       var cycles = <%-JSON.stringify(data)%>;
+        console.log(cycles);
+        function timeOfGivenDate(str) {
+              var localDate = new Date(str);
+              var h = localDate.getHours(), m = localDate.getMinutes();
+              if (h < 10) { h = "0" + h; } if (m < 10) { m = "0" + m; }
+              return h + ":" + m;
+        }
+        function dateOfGivenDate(str) {
+              var localDate = new Date(str);
+              var day = localDate.getDate(), month = localDate.getMonth() + 1, year = localDate.getFullYear();
+              return day + "-" + month + "-" + year;
+        }
+    </script>
+
+    <style>
+      a {
+        transition: 0.25s all;
+      }
+
+      .coolboy {
+        margin-bottom: 40px;
+      }
+
+      .navbar-nav > li > .dropdown-menu {
+        background-color: #e7e7e7;
+      }
+
+      .navbar-nav > li > .dropdown-menu a {
+        color: #555555;
+      }
+
+      .footer {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        padding: 0.2 rem;
+
+        text-align: center;
+      }
+
+      html {
+        height: 100%;
+        box-sizing: border-box;
+      }
+
+      body {
+        position: relative;
+        margin: 0;
+        padding-bottom: 6rem;
+        min-height: 100%;
+      }
+    </style>
+
+    <script>
+      // action to put a "out of hours" button
+      function outOfHoursAlert(){
+        alert("利用時間外です!");
+      }
+      // action to put a "available" button
+      function availableAction(index){
+        
+        location.href = location.href + "/" + cycles[i].cycle_id;
+      }
+    </script>
+
+    <script>
+      $(document).ready(function() {
+        $.each(cycles, function(i, val) {
+          $("#live-orders").append(
+            `<div class='col-xs-12 col-md-3 coolboy'> <article class='card animated fadeInLeft'> <h4>Booking time : ${timeOfGivenDate(cycles[i].booking_time)} on ${dateOfGivenDate(cycles[i].booking_time)}</h4> <img class='card-img-top img-responsive' src='${cycles[i].cycle_image_link}' alt='${cycles[i].cycle_name}' height="200px" style="width: auto;" />   <div class='card-body'> ` 
+              +
+              ` <h4 class='card-title' id='cycle-title'>  ${cycles[i].cycle_name} ` 
+                +
+              `<span style='font-size: small;'>of <a href='#' class='badge badge-secondary'>${cycles[i].from_user_name}</a></span> </h4><p class='card-text'>  <strong>Pickup point  <i class='fa fa-map-marker' aria-hidden='true' style='color:red;'></i> : </strong> ${cycles[i].pickup_address} <br /> ` 
+                +
+              `<strong>From <i class='fa fa-calendar text-primary' aria-hidden='true'></i> :  </strong> ${timeOfGivenDate(
+                cycles[i].from_time
+              )}<span class='badge badge-pill badge-light'>${dateOfGivenDate(
+                cycles[i].from_time
+              )}</span> <br />  <strong>To  <i class='fa fa-calendar-times-o .text-muted' aria-hidden='true'></i>   :  </strong> ${timeOfGivenDate(
+                cycles[i].to_time
+              )} <span class='badge badge-pill badge-light'>${dateOfGivenDate(
+                cycles[i].to_time
+              )}` 
+              +
+              "</span>   <br />  </p>  " 
+              +
+
+              `<!-- Change the text in the button depending on wheter it is in use or not. -->
+              <button type='button' class='btn btn-primary text-center' id='model-pop-${i}' data-toggle='modal' data-target='#model-pop-gg-${i}'>Use Again</button>
+              <!-- TO DO: link to somewhere if taped start using button -->
+              </div> </article>
+            </div>`
+          );
+        });
+      });
+    </script>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="#">BI-KEYING</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/"
+              >Home <span class="sr-only">(current)</span></a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/orders/cycles">Your Cycles</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle  active"
+              href="#"
+              id="navbarDropdown"
+              role="button"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              Orders
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="/orders/cycles">Your Cycles</a>
+              <a class="dropdown-item" href="/orders/previous"
+                >Previous Bookings</a
+              >
+
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="/orders/live">Live Bookings</a>
+            </div>
+          </li>
+        </ul>
+        <ul class="navbar-nav  navbar-right">
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              href="/addcycle"
+              tabindex="-1"
+              aria-disabled="true"
+              >Add Cycle</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              href=""
+              id="userdata"
+              tabindex="-1"
+              aria-disabled="true"
+              >Username</a
+            >
+          </li>
+          <li class="nav-item">
+            <form
+              class="form-inline my-2 my-lg-0"
+              method="POST"
+              action="/logout"
+            >
+              <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">
+                Logout
+              </button>
+            </form>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <div id="live-orders"></div>
+
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
+
+    <script>
+      var x = document.getElementById("userdata");
+      x.href = "/users/" + user[0].id;
+      x.innerHTML = user[0].name;
+    </script>
+  </body>
+</html>
