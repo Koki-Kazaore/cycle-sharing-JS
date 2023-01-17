@@ -123,6 +123,7 @@ app.get("/users/:id", sessionRoute.redirectLogin, function(req, res) {
       [req.params.id],
       function(error, results, fields) {
         if (error) throw error;
+        // console.log("results : " + results);
         //res.end(JSON.stringify(results));
         res.render("user.ejs", {
           id: results[0].id,

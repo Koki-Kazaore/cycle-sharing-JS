@@ -12,7 +12,9 @@ router.get("/previous", previous.previous);
 
 router.get("/cycles", cycles.cycles);
 
-router.get("/live/unlock", unlock.unlock);
+// router.get("/live/unlock", unlock.unlock);
+
+router.get("/live/:cycle_id/unlock", unlock.unlock);
 
 router.get("/", (req, res) => {
   res.send("<h3>Orders</h3>");
