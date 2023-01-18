@@ -1,15 +1,199 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BI-KEYING start</title>
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      rel="stylesheet"
+    />
+    <link href="./style.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+      var user = <%-JSON.stringify(user)%>;
+      var cycle = <%-JSON.stringify(cycle)%>;
+      console.log(user);
+      console.log(cycle);
+    </script>
 
-</head>
-<body>
-  <p>hello world</p>
-  <p>good morning, world</p>
-  <p>unlock here!!</p>
-</body>
+    <style>
+      a {
+        transition: 0.25s all;
+      }
+
+      .navbar-nav > li > .dropdown-menu {
+        background-color: #e7e7e7;
+      }
+
+      .navbar-nav > li > .dropdown-menu a {
+        color: #555555;
+      }
+
+      .footer {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        padding: 0.2 rem;
+
+        text-align: center;
+      }
+
+      html {
+        height: 100%;
+        box-sizing: border-box;
+      }
+
+      body {
+        position: relative;
+        margin: 0;
+        padding-bottom: 6rem;
+        min-height: 100%;
+      }
+    </style>
+
+    <script>
+      $(document).ready(function() {
+        $.each(cycle, function(i, val) {
+          $("#unlock-bike").append(
+          `<div class='col-xs-12 col-md-3 coolboy'> <article class='card animated fadeInLeft'> <img class='card-img-top img-responsive' src='${cycle[0].cycle_image_link}' alt='${cycle[0].cycle_name}' height="200px" style="width: auto;" />   <div class='card-body'> ` 
+              +
+              ` <h4 class='card-title' id='cycle-title'>  ${cycle[0].cycle_name} ` 
+                +
+              `<span style='font-size: small;'>of <a href='#' class='badge badge-secondary'>${cycle[0].from_user_name}</a></span> </h4><p class='card-text'>  <strong>Pickup point  <i class='fa fa-map-marker' aria-hidden='true' style='color:red;'></i> : </strong> ${cycle[0].pickup_address} <br /> ` 
+              +
+              "</span>   <br />  </p>  " 
+              +
+              "<button type='button' onclick='' class='btn btn-primary text-center' id='' data-toggle='modal' data-target=''>Unlock</button>"
+              +
+              "<button type='button' onclick='' class='btn btn-primary text-center' id='' data-toggle='modal' data-target=''>Lock</button>"
+              +
+              "<a href='https://google.com' class='button'>Go to Google</a>"
+              +
+              `</div> </article>
+            </div>`
+          );
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="#">BI-KEYING</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/"
+              >Home <span class="sr-only">(current)</span></a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/orders/cycles">Your Cycles</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              id="navbarDropdown"
+              role="button"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              Orders
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="/orders/cycles">Your Cycles</a>
+              <a class="dropdown-item" href="/orders/previous"
+                >Previous Bookings</a
+              >
+
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="/orders/live">Live Bookings</a>
+            </div>
+          </li>
+          <!-- <li class="nav-item">
+                    <a class="nav-link" href="/orders/live">Live Orders</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/orders/previous">Previous Orders</a>
+                  </li> -->
+        </ul>
+        <ul class="navbar-nav  navbar-right">
+        
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              href="/addcycle"
+              tabindex="-1"
+              aria-disabled="true"
+              >Add Cycle</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link  active"
+              href=""
+              id="userdata"
+              tabindex="-1"
+              aria-disabled="true"
+              >Username</a
+            >
+          </li>
+          <li class="nav-item">
+            <form
+              class="form-inline my-2 my-lg-0"
+              method="POST"
+              action="/logout"
+            >
+              <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">
+                Logout
+              </button>
+            </form>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <div id="unlock-bike"></div>
+
+    <script
+    src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
+
+    <script>
+      var x = document.getElementById("userdata");
+      x.href = "/users/" + user[0].id;
+      x.innerHTML = user[0].name;
+    </script>
+  </body>
 </html>

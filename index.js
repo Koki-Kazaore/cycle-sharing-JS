@@ -115,7 +115,7 @@ app.post("/reset", reset.reset);
 app.get("/users/:id", sessionRoute.redirectLogin, function(req, res) {
   const { userId } = req.session;
   // console.log("req param id :  " + req.params.id);
-  // console.log("userID :     sdfg   " + userId);
+  console.log("userID :     sdfg   " + userId);
 
   if (userId == req.params.id) {
     connection.query(

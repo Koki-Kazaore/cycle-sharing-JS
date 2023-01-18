@@ -2,17 +2,31 @@
 
 var connection = require("../../config/db").connection;
 
-exports.unlock = function(req, res) {
-  const { cycleId } = req.params.cycle_id;
+exports.unlock = async function(req, res) {
+  const { userId } = req.session;
+  const cycleId = req.params.cycle_id;
   console.log("req params cycle_id : " + req.params.cycle_id);
+  console.log("const { cycleId } : " + cycleId);
 
-  connection.query("SELECT * FROM cycles where cycle_id=?", [cycleId], function(
+  await connection.query("SELECT * FROM users where id=?",[userId],
+  function(
     error,
     results,
     fields
   ) {
-    if (error) throw error;
-    console.log("results : " + results);
-    res.render("unlock.ejs");
+    connection.query(
+      "SELECT * FROM cycles WHERE cycle_id=?",
+      [cycleId],function(
+      error,
+      results2,
+      fields
+    ) {
+      if (error) throw error;
+      console.log("results2 : " + results2);
+      res.render("unlock.ejs", {
+        user: results,
+        cycle: results2
+      });
+    });
   });
 };
