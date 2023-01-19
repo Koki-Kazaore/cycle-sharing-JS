@@ -11,6 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "adorable-avatars": "^0.5.0",
+    "assert": "^2.0.0",
     "body-parser": "^1.19.0",
     "cloudinary": "^1.32.0",
     "dotenv": "^16.0.3",
@@ -26,6 +27,7 @@
     "passport": "^0.4.1",
     "password-hash": "^1.2.2",
     "react-script": "^2.0.5",
-    "request": "^2.88.0"
+    "request": "^2.88.0",
+    "url-mask": "^1.0.5"
   }
 }

@@ -58,6 +58,22 @@
     </style>
 
     <script>
+      require('dotenv').config(); // .envファイルの有効化
+
+      function binaryLock(){
+        var BLYNK_AUTH_TOKEN = '<%= process.env.BLYNK_AUTH_TOKEN %>';
+        // const url = `https://sgp1.blynk.cloud/external/api/update?token=${BLYNK_AUTH_TOKEN}&v0=1`;
+
+        // access to the Blynk
+        // fetch(`https://sgp1.blynk.cloud/external/api/update?token=${BLYNK_AUTH_TOKEN}&v0=1`, {
+        //   method: "GET"
+        // });
+
+        console.log(1)
+      }
+    </script>
+
+    <script>
       $(document).ready(function() {
         $.each(cycle, function(i, val) {
           $("#unlock-bike").append(
@@ -69,7 +85,7 @@
               +
               "</span>   <br />  </p>  " 
               +
-              "<button type='button' onclick='' class='btn btn-primary text-center' id='' data-toggle='modal' data-target=''>Unlock</button>"
+              "<button type='button' onclick='binaryLock()' class='btn btn-primary text-center' id='' data-toggle='modal' data-target=''>Unlock</button>"
               +
               "<button type='button' onclick='' class='btn btn-primary text-center' id='' data-toggle='modal' data-target=''>Lock</button>"
               +
