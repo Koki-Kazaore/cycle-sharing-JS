@@ -1,0 +1,9 @@
+# 覚書き感覚で書き残す
+
+【2023/01/19】
+・Blynkへのアクセストークンについてのセキュリティー関連構築中
+・デベロッパーツールでバレバレで良ければ解錠可能
+・色々調べて所、Google Cloudより提供されているSecret Manager: Node.js Clientに可能性を感じる
+・↑参照:https://cloud.google.com/nodejs/docs/reference/secret-manager/latest
+・次回//シークレットマネージャーについての思考を巡らせる．
+
