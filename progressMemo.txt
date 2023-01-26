@@ -1,5 +1,12 @@
 # 覚書き感覚で書き残す
 
+【2023/01/26】
+・azureのkey vaultを使ってみるのも面白そう。
+・それほど期待はしていないが、実験的に試してみよう。
+・遷移URLが暗号化できれば儲けもの。
+・key vaultチュートリアルは下記のページまで実行済み
+・https://learn.microsoft.com/en-us/azure/key-vault/secrets/quick-create-node#:~:text=Grant%20access%20to%20your%20key%20vault
+
 【2023/01/19】
 ・Blynkへのアクセストークンについてのセキュリティー関連構築中
 ・デベロッパーツールでバレバレで良ければ解錠可能
